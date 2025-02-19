@@ -8,17 +8,25 @@ export default function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      (function() {
+      async function loadWalkMe() {
         var walkme = document.createElement('script'); 
         walkme.type = 'text/javascript'; 
         walkme.async = true; 
         walkme.src = `https://cdn.walkme.com/users/${guid}${isEnv(env)}/walkme_${guid}_https.js`; 
         var s = document.getElementsByTagName('script')[0]; 
         s.parentNode.insertBefore(walkme, s); 
-        window._walkmeConfig = {smartLoad:true}; 
-      })();
+        window._walkmeConfig = {smartLoad:true};
+        await new Promise(resolve => setTimeout(resolve, 1200))
+      };
+      async function statusReport(){
+        await loadWalkMe()
+        if (_walkmeInternals.removeWalkMeReason) {
+          alert(_walkmeInternals.removeWalkMeReason )
+        }
+      }
+      statusReport()
     } catch (error) {
-      alert("Snippet is already loaded")
+      alert(error)
     }
   }
   const removeWalkMe = (event) =>{
@@ -39,17 +47,19 @@ export default function App() {
   }
 
   return(
-  <form>
-    <label>Please add GUID here:
+  <form id="mainForm">
+    <label>Please add GUID here:&nbsp;
       <input 
+      id="textbox"
       type="text" 
       value={guid}
       onChange={(e) => setGuid(e.target.value)}
       />
     </label>
     <br />
-    <label>Please enter Env here: /
+    <label>Please enter Env here:&nbsp;
       <input
+      id="textbox"
       type="text"
       value={env}
       onChange={(e) => setEnv(e.target.value)}
@@ -57,6 +67,11 @@ export default function App() {
     </label>
     <br />
       <input type="submit" onClick={handleSubmit}/>
-      <input type="submit" className="removeWalkMeButton" onClick={removeWalkMe} />
+      <input 
+      type="submit" 
+      className="removeWalkMeButton" 
+      onClick={removeWalkMe} 
+      value="Remove WalkMe"
+      />
   </form>
 )}

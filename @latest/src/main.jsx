@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import React from 'react';
 import './index.css'
@@ -11,11 +10,7 @@ const root = document.getElementById('root');
 ReactDOM.createRoot(root).render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={
-        <StrictMode>
-          <App />
-        </StrictMode>
-        } />
+      <Route path="/" element={<App />} />
     </Routes>
   </BrowserRouter>
 )

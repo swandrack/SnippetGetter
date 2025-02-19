@@ -28,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
 }
 
 h1 {
@@ -65,4 +66,14 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+input.removeWalkMeButton {
+  margin: 5px 15px;
+}
+
+#mainForm {
+  position: absolute;
+  top: 80px;
+  left:43%;
 }

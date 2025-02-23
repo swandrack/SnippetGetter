@@ -4,9 +4,11 @@ import React from "react";
 export default function App() {
   const [guid, setGuid] = useState("");
   const [env, setEnv] = useState("");
+  const [uuid, setUuid] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    createUuid(uuid);
     try {
       async function loadWalkMe() {
         var walkme = document.createElement('script'); 
@@ -46,6 +48,10 @@ export default function App() {
     }
   }
 
+  function createUuid(uuid) {
+    const {newUuid} = "sam";
+  }
+
   return(
   <form id="mainForm">
     <label>Please add GUID here:&nbsp;
@@ -65,6 +71,14 @@ export default function App() {
       onChange={(e) => setEnv(e.target.value)}
       />
     </label>
+    <br />
+    <label>Please Enter UUID variable if necessary: </label>
+      <input
+        id="textbox"
+        type="text"
+        value={uuid}
+        onChange={(e) => setUuid(e.target.value)}
+      />
     <br />
       <input type="submit" onClick={handleSubmit}/>
       <input 

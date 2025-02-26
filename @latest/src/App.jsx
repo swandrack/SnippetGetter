@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import { loadWalkMe } from "./routes/loadWalkme";
 
 export default function App() {
   const [guid, setGuid] = useState("");
@@ -7,36 +8,25 @@ export default function App() {
   const [uuid, setUuid] = useState("");
 
   const handleSubmit = (event) => {
+    const getGuid = guid
+    const environment = isEnv(env)
     event.preventDefault();
     createUuid(uuid);
-    try {
-      async function loadWalkMe() {
-        var walkme = document.createElement('script'); 
-        walkme.type = 'text/javascript'; 
-        walkme.async = true; 
-        walkme.src = `https://cdn.walkme.com/users/${guid}${isEnv(env)}/walkme_${guid}_https.js`; 
-        var s = document.getElementsByTagName('script')[0]; 
-        s.parentNode.insertBefore(walkme, s); 
-        window._walkmeConfig = {smartLoad:true};
-        await new Promise(resolve => setTimeout(resolve, 1200))
-      };
-      async function statusReport(){
-        await loadWalkMe()
-        if (_walkmeInternals.removeWalkMeReason) {
-          alert(_walkmeInternals.removeWalkMeReason )
-        }
-      }
-      statusReport()
-    } catch (error) {
-      alert(error)
+    loadWalkMe(getGuid, environment, statusReport)
     }
-  }
+
   const removeWalkMe = (event) =>{
     try {
       event.preventDefault()
       _walkMe.removeWalkMe()
     } catch (error) {
       alert("WalkMe is not running!")
+    }
+  }
+
+  async function statusReport(){
+    if (_walkmeInternals.removeWalkMeReason) {
+      alert(_walkmeInternals.removeWalkMeReason )
     }
   }
 
@@ -49,7 +39,7 @@ export default function App() {
   }
 
   function createUuid(uuid) {
-    const {newUuid} = "sam";
+    window[uuid] = "Hello I got places to be"
   }
 
   return(

@@ -11,14 +11,10 @@ import {
 import PropTypes from "prop-types";
 
 SettingsDisplay.propTypes = {
-    values: [],
-};
-
-SettingsDisplay.propTypes = {
     values: PropTypes.array,
 };
 
-export function SettingsDisplay({ values }) {
+export function SettingsDisplay({values}) {
     return (
         <Card
             sx={{ background: "transparent", color: "white", boxShadow: "none" }}

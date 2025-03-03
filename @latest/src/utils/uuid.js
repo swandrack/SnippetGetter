@@ -1,5 +1,4 @@
 export function setWindowVariable(path) {
-
     const parts = path.split('.');
     let current = window;
     for (let i = 0; i < parts.length; i++) {

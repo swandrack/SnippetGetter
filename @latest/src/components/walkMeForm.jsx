@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { loadWalkMe } from "../routes/loadWalkme";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { SettingsDisplay } from "./SettingsDisplay";
 
+const getLocalStorageItem = (key, defaultValue = "") => {
+    return localStorage.getItem(key) || defaultValue;
+};
+
+const setLocalStorageItem = (key, value) => {
+    localStorage.setItem(key, value);
+};
+
+const removeLocalStorageItem = (key) => {
+    localStorage.removeItem(key);
+}
+
 export function WalkMeForm() {
-    const [guid, setGuid] = useState("");
-    const [env, setEnv] = useState("");
-    const [uuid, setUuid] = useState("");
-    const [chartValues, setChartValues] = useState([]);
+    const [guid, setGuid] = useState(getLocalStorageItem("guid"));
+    const [env, setEnv] = useState(getLocalStorageItem("env"));
+    const [uuid, setUuid] = useState(getLocalStorageItem("uuid"));
+    const [chartValues, setChartValues] = useState([
+        { name: "guid", value: getLocalStorageItem("guid") },
+        { name: "uuid", value: getLocalStorageItem("uuid") },
+        { name: "env", value: getLocalStorageItem("env") },
+    ]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -19,19 +35,21 @@ export function WalkMeForm() {
             message: "WalkMe Settings Updated",
             variant: "success",
         });
-        setChartValues([
-            { name: "guid", value: guid },
-            { name: "uuid", value: uuid },
-            { name: "env", value: env },
-        ]);
     };
 
     const removeWalkMe = (event) => {
         event.preventDefault();
+        let variables = ["env", "guid", "uuid"]
+        variables.forEach((varr) => {
+            removeLocalStorageItem(varr)
+        })
+        setGuid("");
+        setEnv("");
+        setUuid("");
         try {
             window._walkMe.removeWalkMe();
             enqueueSnackbar({ message: "WalkMe Removed!", variant: "success" });
-            setChartValues([]);
+            
         } catch (error) {
             enqueueSnackbar({
                 message: `Error removing WalkMe: ${error}`,
@@ -47,14 +65,24 @@ export function WalkMeForm() {
     }
 
     function formatEnv(env) {
+        setLocalStorageItem("env", env);
         return env ? `/${env}` : "";
     }
 
     function createUuid(uuid) {
         if (uuid) {
+            setLocalStorageItem("uuid", uuid);
             window[uuid] = "Hello I got places to be";
         }
     }
+
+    useMemo(() => {
+        setChartValues([
+            { name: "guid", value: guid },
+            { name: "uuid", value: uuid },
+            { name: "env", value: env },
+        ]);
+    }, [env, guid, uuid])
 
     return (
         <Container maxWidth="sm">
@@ -104,7 +132,7 @@ export function WalkMeForm() {
                     </Button>
                 </Box>
             </Box>
-            {chartValues.length > 0 && (
+            {chartValues.filter((arrItem) => arrItem.value !== "").length > 0 && (
                 <Box sx={{ mt: 16 }}>
                     <SettingsDisplay values={chartValues} />
                 </Box>

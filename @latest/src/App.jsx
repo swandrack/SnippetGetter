@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React from "react";
 import { loadWalkMe } from "./routes/loadWalkme";
 
 export default function App() {
@@ -18,15 +17,15 @@ export default function App() {
   const removeWalkMe = (event) =>{
     try {
       event.preventDefault()
-      _walkMe.removeWalkMe()
+      window._walkMe.removeWalkMe()
     } catch (error) {
-      alert("WalkMe is not running!")
+      console.error("Failed to remove WalkMe:", error);
     }
   }
 
   async function statusReport(){
-    if (_walkmeInternals.removeWalkMeReason) {
-      alert(_walkmeInternals.removeWalkMeReason )
+    if (window._walkmeInternals.removeWalkMeReason) {
+      alert(window._walkmeInternals.removeWalkMeReason )
     }
   }
 

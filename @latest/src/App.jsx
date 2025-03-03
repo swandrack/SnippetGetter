@@ -1,6 +1,6 @@
 import { WalkMeForm } from "./components/walkMeForm";
 import { SnackbarProvider } from "notistack";
-import { loadWalkMe } from "./routes/loadWalkme"
+import { loadWalkMe } from "./utils/loadWalkme"
 import "./index.css";
 
 async function statusReport() {

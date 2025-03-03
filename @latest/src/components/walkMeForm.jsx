@@ -2,18 +2,12 @@ import { useState, useMemo } from "react";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { SettingsDisplay } from "./SettingsDisplay";
-
-const getLocalStorageItem = (key, defaultValue = "") => {
-    return localStorage.getItem(key) || defaultValue;
-};
-
-const setLocalStorageItem = (key, value) => {
-    localStorage.setItem(key, value);
-};
-
-const removeLocalStorageItem = (key) => {
-    localStorage.removeItem(key);
-}
+import { setWindowVariable } from "../utils/uuid";
+import {
+    getLocalStorageItem,
+    setLocalStorageItem,
+    removeLocalStorageItem,
+} from "../utils/storage";
 
 export function WalkMeForm() {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
@@ -27,17 +21,16 @@ export function WalkMeForm() {
 
     const removeWalkMe = (event) => {
         event.preventDefault();
-        let variables = ["env", "guid", "uuid"]
-        variables.forEach((varr) => {
-            removeLocalStorageItem(varr)
-        })
+        let variables = ["env", "guid", "uuid"];
+        variables.forEach((localItem) => {
+            removeLocalStorageItem(localItem);
+        });
         setGuid("");
         setEnv("");
         setUuid("");
         try {
             window._walkMe.removeWalkMe();
             enqueueSnackbar({ message: "WalkMe Removed!", variant: "success" });
-            
         } catch (error) {
             enqueueSnackbar({
                 message: `Error removing WalkMe: ${error}`,
@@ -50,23 +43,29 @@ export function WalkMeForm() {
         event.preventDefault();
         formatEnv(env);
         createUuid(uuid);
-        setLocalStorageItem("guid", guid)
+        setLocalStorageItem("guid", guid);
         enqueueSnackbar({
             message: "WalkMe Settings Updated",
             variant: "success",
         });
     };
 
-
     function formatEnv(env) {
+        const envString = env ? `/${env}` : "";
         setLocalStorageItem("env", env);
-        return env ? `/${env}` : "";
+        return envString;
     }
 
     function createUuid(uuid) {
         if (uuid) {
             setLocalStorageItem("uuid", uuid);
-            window[uuid] = "Hello I got places to be";
+            const parts = uuid.split(".");
+
+            if (parts.length === 0) {
+                window.uuid = "Hello I got places to be";
+            } else {
+                setWindowVariable(uuid);
+            }
         } else {
             setLocalStorageItem("uuid", "none");
         }
@@ -78,7 +77,7 @@ export function WalkMeForm() {
             { name: "uuid", value: uuid },
             { name: "env", value: env },
         ]);
-    }, [env, guid, uuid])
+    }, [env, guid, uuid]);
 
     return (
         <Container maxWidth="sm">
@@ -128,7 +127,8 @@ export function WalkMeForm() {
                     </Button>
                 </Box>
             </Box>
-            {chartValues.filter((arrItem) => arrItem.value !== "").length > 0 && (
+            {chartValues.filter((arrItem) => arrItem.value !== "").length >
+                0 && (
                 <Box sx={{ mt: 16 }}>
                     <SettingsDisplay values={chartValues} />
                 </Box>

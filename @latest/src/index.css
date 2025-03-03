@@ -1,150 +1,141 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+    color: #535bf2;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  justify-content: center;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+    justify-content: center;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    border-color: #646cff;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+    a:hover {
+        color: #747bff;
+    }
+    button {
+        background-color: #f9f9f9;
+    }
 }
 
 input.removeWalkMeButton {
-  margin: 5px 15px;
+    margin: 5px 15px;
 }
 
 #mainForm {
-  position: absolute;
-  top: 80px;
-  left:43%;
+    position: absolute;
+    top: 80px;
+    left: 43%;
 }
-
 
 /* material ui */
 .MuiTypography-root {
-  font-family: 'Arial', sans-serif !important;
-  color: #fff !important;
+    font-family: "Arial", sans-serif !important;
+    color: #fff !important;
 }
 
 .form-container {
-  margin-top: 32px;
+    margin-top: 32px;
 }
 
 .form-title {
-  margin-bottom: 16px;
-  font-size: 1.25rem;
+    margin-bottom: 16px;
+    font-size: 1.25rem;
 }
 
 .text-field {
-  width: 100%;
-  margin-bottom: 16px;
+    width: 100%;
+    margin-bottom: 16px;
 }
 
 .MuiInputBase-root {
-  color: white !important;
+    color: white !important;
 }
 
 .MuiOutlinedInput-root {
-  border-radius: 5px !important;
+    border-radius: 5px !important;
 }
 
 .MuiOutlinedInput-notchedOutline {
-  border-color: white !important;
+    border-color: white !important;
 }
 
 .MuiInputLabel-root {
-  color: white !important;
+    color: white !important;
 }
 
 .MuiInputLabel-root.Mui-focused {
-  color: white !important;
+    color: white !important;
 }
 
 .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: white !important;
+    border-color: white !important;
 }
 
 .button-container {
-  display: flex;
-  gap: 16px;
-  margin-top: 16px;
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
 }
 
 .MuiButton-root {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #fff;
-  border-radius: 8px;
-  border: none;
-}
-
-.MuiButton-outlined {
-  border-color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
 }
 
 .MuiButton-outlinedSecondary:hover {
-  border-color: #9c27b0;
+    border-color: #9c27b0;
 }
 
 .MuiButton-outlinedWarning:hover {
-  border-color: #feb981;
+    border-color: #feb981;
 }

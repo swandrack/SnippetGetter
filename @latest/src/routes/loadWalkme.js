@@ -6,7 +6,9 @@ export function loadWalkMe(guid, env, callback) {
     var s = document.getElementsByTagName('script')[0]; 
     s.parentNode.insertBefore(walkme, s); 
     window._walkmeConfig = {smartLoad:true};
+    if (callback) {
     setTimeout(() => {
       callback()
     }, 2500);
+  }
 }

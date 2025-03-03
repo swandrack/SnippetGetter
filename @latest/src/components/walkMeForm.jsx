@@ -9,12 +9,23 @@ export function WalkMeForm() {
     const [env, setEnv] = useState("");
     const [uuid, setUuid] = useState("");
     const [chartValues, setChartValues] = useState([]);
+    window.localGuid = localStorage.getItem("wmLocalGuid") || false;
+    window.localEnv = localStorage.getItem("wmLocalEnv") || "";
+
+    if (localGuid != false) {
+        try {
+        loadWalkMe(localGuid, localEnv)
+        } catch(e) {
+            console.log(e)
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const environment = formatEnv(env);
+        localStorage.setItem("wmLocalEnv", env)
         createUuid(uuid);
-        loadWalkMe(guid, environment, statusReport);
+        localStorage.setItem("wmLocalGuid", guid)
+        loadWalkMe(guid, env, statusReport);
         enqueueSnackbar({
             message: "WalkMe Settings Updated",
             variant: "success",
@@ -32,6 +43,7 @@ export function WalkMeForm() {
             window._walkMe.removeWalkMe();
             enqueueSnackbar({ message: "WalkMe Removed!", variant: "success" });
             setChartValues([]);
+            localStorage.removeItem("walkmeGuid")
         } catch (error) {
             enqueueSnackbar({
                 message: `Error removing WalkMe: ${error}`,

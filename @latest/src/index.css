@@ -77,3 +77,74 @@ input.removeWalkMeButton {
   top: 80px;
   left:43%;
 }
+
+
+/* material ui */
+.MuiTypography-root {
+  font-family: 'Arial', sans-serif !important;
+  color: #fff !important;
+}
+
+.form-container {
+  margin-top: 32px;
+}
+
+.form-title {
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.text-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.MuiInputBase-root {
+  color: white !important;
+}
+
+.MuiOutlinedInput-root {
+  border-radius: 5px !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}
+
+.MuiInputLabel-root {
+  color: white !important;
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: white !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}
+
+.button-container {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.MuiButton-root {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+}
+
+.MuiButton-outlined {
+  border-color: white;
+}
+
+.MuiButton-outlinedSecondary:hover {
+  border-color: #9c27b0;
+}
+
+.MuiButton-outlinedWarning:hover {
+  border-color: #feb981;
+}

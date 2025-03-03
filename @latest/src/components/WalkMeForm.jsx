@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loadWalkMe } from "../routes/loadWalkme";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
+import { enqueueSnackbar } from 'notistack';
 
 export function WalkMeForm() {
     const [guid, setGuid] = useState("");
@@ -12,14 +13,16 @@ export function WalkMeForm() {
         const environment = formatEnv(env);
         createUuid(uuid);
         loadWalkMe(guid, environment, statusReport);
+        enqueueSnackbar({message:"WalkMe Settings Updated", variant:"success"})
     };
 
     const removeWalkMe = (event) => {
         event.preventDefault();
         try {
             window._walkMe.removeWalkMe();
+            enqueueSnackbar({message:"WalkMe Removed!", variant:"success"})
         } catch (error) {
-            console.error("Failed to remove WalkMe:", error);
+            enqueueSnackbar({message: `Error removing WalkMe: ${error}`, variant: "warning"})
         }
     };
 
@@ -41,7 +44,7 @@ export function WalkMeForm() {
 
     return (
         <Container maxWidth="sm">
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
+            <Box component="form" sx={{ mt: 4 }}>
                 <Typography variant="h5" gutterBottom>
                     WalkMe Configuration
                 </Typography>
@@ -74,6 +77,7 @@ export function WalkMeForm() {
                         type="submit"
                         variant="outlined"
                         color="secondary"
+                        onClick={handleSubmit}
                     >
                         Submit
                     </Button>

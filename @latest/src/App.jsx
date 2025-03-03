@@ -1,6 +1,12 @@
 import { WalkMeForm } from "./components/WalkMeForm";
-import "./index.css"
+import { SnackbarProvider } from "notistack";
+
+import "./index.css";
 
 export default function App() {
-    return <WalkMeForm />;
+    return (
+        <SnackbarProvider>
+            <WalkMeForm />
+        </SnackbarProvider>
+    );
 }

@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react";
-import { loadWalkMe } from "../routes/loadWalkme";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { SettingsDisplay } from "./SettingsDisplay";
@@ -26,17 +25,6 @@ export function WalkMeForm() {
         { name: "env", value: getLocalStorageItem("env") },
     ]);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const environment = formatEnv(env);
-        createUuid(uuid);
-        loadWalkMe(guid, environment, statusReport);
-        enqueueSnackbar({
-            message: "WalkMe Settings Updated",
-            variant: "success",
-        });
-    };
-
     const removeWalkMe = (event) => {
         event.preventDefault();
         let variables = ["env", "guid", "uuid"]
@@ -58,11 +46,17 @@ export function WalkMeForm() {
         }
     };
 
-    async function statusReport() {
-        if (window._walkmeInternals?.removeWalkMeReason) {
-            alert(window._walkmeInternals.removeWalkMeReason);
-        }
-    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        formatEnv(env);
+        createUuid(uuid);
+        setLocalStorageItem("guid", guid)
+        enqueueSnackbar({
+            message: "WalkMe Settings Updated",
+            variant: "success",
+        });
+    };
+
 
     function formatEnv(env) {
         setLocalStorageItem("env", env);
@@ -73,6 +67,8 @@ export function WalkMeForm() {
         if (uuid) {
             setLocalStorageItem("uuid", uuid);
             window[uuid] = "Hello I got places to be";
+        } else {
+            setLocalStorageItem("uuid", "none");
         }
     }
 

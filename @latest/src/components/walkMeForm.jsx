@@ -1,28 +1,42 @@
 import { useState } from "react";
 import { loadWalkMe } from "../routes/loadWalkme";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
-import { enqueueSnackbar } from 'notistack';
+import { enqueueSnackbar } from "notistack";
+import { SettingsDisplay } from "./SettingsDisplay";
 
 export function WalkMeForm() {
     const [guid, setGuid] = useState("");
     const [env, setEnv] = useState("");
     const [uuid, setUuid] = useState("");
+    const [chartValues, setChartValues] = useState([]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const environment = formatEnv(env);
         createUuid(uuid);
         loadWalkMe(guid, environment, statusReport);
-        enqueueSnackbar({message:"WalkMe Settings Updated", variant:"success"})
+        enqueueSnackbar({
+            message: "WalkMe Settings Updated",
+            variant: "success",
+        });
+        setChartValues([
+            { name: "guid", value: guid },
+            { name: "uuid", value: uuid },
+            { name: "env", value: env },
+        ]);
     };
 
     const removeWalkMe = (event) => {
         event.preventDefault();
         try {
             window._walkMe.removeWalkMe();
-            enqueueSnackbar({message:"WalkMe Removed!", variant:"success"})
+            enqueueSnackbar({ message: "WalkMe Removed!", variant: "success" });
+            setChartValues([]);
         } catch (error) {
-            enqueueSnackbar({message: `Error removing WalkMe: ${error}`, variant: "warning"})
+            enqueueSnackbar({
+                message: `Error removing WalkMe: ${error}`,
+                variant: "warning",
+            });
         }
     };
 
@@ -90,6 +104,11 @@ export function WalkMeForm() {
                     </Button>
                 </Box>
             </Box>
+            {chartValues.length > 0 && (
+                <Box sx={{ mt: 16 }}>
+                    <SettingsDisplay values={chartValues} />
+                </Box>
+            )}
         </Container>
     );
 }

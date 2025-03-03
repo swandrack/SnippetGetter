@@ -1,4 +1,4 @@
-import { WalkMeForm } from "./components/WalkMeForm";
+import { WalkMeForm } from "./components/walkMeForm";
 import { SnackbarProvider } from "notistack";
 
 import "./index.css";

@@ -3,6 +3,7 @@ import { TextField, Button, Box, Typography, Container } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { SettingsDisplay } from "./SettingsDisplay";
 import { setWindowVariable } from "../utils/uuid";
+import { Link } from "react-router-dom";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
@@ -133,6 +134,9 @@ export function WalkMeForm() {
                     <SettingsDisplay values={chartValues} />
                 </Box>
             )}
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                <Link style={{color:"black"}} to="/terminal">Terminal</Link>
+            </Box>
         </Container>
     );
 }

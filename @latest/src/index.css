@@ -139,3 +139,21 @@ input.removeWalkMeButton {
 .MuiButton-outlinedWarning:hover {
     border-color: #feb981;
 }
+
+/** terminal **/
+.react-terminal-window-buttons button {
+    padding: 6px !important;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    
+}
+
+.terminal-container {
+    width: 900px !important;
+}
+
+.react-terminal {
+    overflow: hidden !important;
+    
+}

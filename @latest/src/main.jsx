@@ -12,7 +12,7 @@ ReactDOM.createRoot(root).render(
         <Routes>
             <Route path="/" element={<App />} />
             <Route path="snippet" element={<SnippetInfo />} />
-            <Route path="/terminal" element={<TerminalController />} />
+            <Route path="terminal" element={<TerminalController />} />
         </Routes>
     </BrowserRouter>
 );

@@ -1,9 +1,4 @@
-export function loadWalkMe(guid, env) {
-    if (window._walkMe) {
-        window._walkMe.removeWalkMe()
-    }
-    
-    localStorage.setItem("guid", guid);
+export function loadWalkMe(guid, env) {    
     var walkme = document.createElement("script");
     walkme.type = "text/javascript";
     walkme.async = true;

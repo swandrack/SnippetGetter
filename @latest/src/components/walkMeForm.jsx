@@ -61,7 +61,12 @@ export function WalkMeForm() {
             message: "WalkMe Settings Updated",
             variant: "success",
         });
+        if (window._walkMe) {
+            window._walkMe.removeWalkMe()
+            setTimeout(loadWalkMe, 3000, guid, `/${env}`)
+        } else {
         loadWalkMe(guid, newEnv)
+        }
     };
 
     const handleChange = (event) => {

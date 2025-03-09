@@ -1,4 +1,4 @@
-export function loadWalkMe(guid, env, callback) {
+export function loadWalkMe(guid, env) {
     if (window._walkMe) {
         window._walkMe.removeWalkMe()
     }
@@ -11,7 +11,4 @@ export function loadWalkMe(guid, env, callback) {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(walkme, s);
     window._walkmeConfig = { smartLoad: true };
-    setTimeout(() => {
-        callback();
-    }, 2500);
 }

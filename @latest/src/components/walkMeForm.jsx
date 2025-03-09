@@ -3,7 +3,7 @@ import { TextField, Button, Box, Typography, Container, InputLabel, MenuItem, Se
 import { enqueueSnackbar } from "notistack";
 import { SettingsDisplay } from "./SettingsDisplay";
 import { setWindowVariable } from "../utils/uuid";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
@@ -110,19 +110,28 @@ export function WalkMeForm() {
                     value={guid}
                     onChange={(e) => setGuid(e.target.value)}
                 />
-                <InputLabel id="demo-select-small-label">Environment</InputLabel>
+                <FormControl 
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                >
+                <InputLabel 
+                    id="demo-select-small-label"
+                    label="Environment"
+                >Please Enter Environment</InputLabel>
                 <Select
                     labelId="demo-select-small-label"
                     id="demo-select-small"
                     value={env}
-                    label="Env"
                     onChange={handleChange}
+                    label="Please Enter Environment"
                 >
                     <MenuItem value="production">Production</MenuItem>
                     <MenuItem value="test">Test</MenuItem>
                     <MenuItem value="success">Success</MenuItem>
                     <MenuItem value="custom">Custom Environment</MenuItem>
                 </Select>
+                </FormControl>
                 <TextField
                     fullWidth
                     margin="normal"

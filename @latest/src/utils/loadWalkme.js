@@ -1,9 +1,4 @@
-export function loadWalkMe(guid, env, callback) {
-    if (window._walkMe) {
-        window._walkMe.removeWalkMe()
-    }
-    
-    localStorage.setItem("guid", guid);
+export function loadWalkMe(guid, env) {    
     var walkme = document.createElement("script");
     walkme.type = "text/javascript";
     walkme.async = true;
@@ -11,7 +6,4 @@ export function loadWalkMe(guid, env, callback) {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(walkme, s);
     window._walkmeConfig = { smartLoad: true };
-    setTimeout(() => {
-        callback();
-    }, 2500);
 }

@@ -1,14 +1,15 @@
-import { useState, useMemo } from "react";
-import { TextField, Button, Box, Typography, Container } from "@mui/material";
+import { useState, useMemo, useEffect } from "react";
+import { TextField, Button, Box, Typography, Container, InputLabel, MenuItem, Select, FormControl } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { SettingsDisplay } from "./SettingsDisplay";
 import { setWindowVariable } from "../utils/uuid";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
     removeLocalStorageItem,
 } from "../utils/storage";
+import { loadWalkMe } from "../utils/loadWalkme";
 
 export function WalkMeForm() {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
@@ -40,21 +41,36 @@ export function WalkMeForm() {
         }
     };
 
+    function formatEnv(env) {
+        if (env != "production") {
+            const customEnv = `/${env}`
+            return customEnv
+        } else {
+            const customEnv = ""
+            return customEnv
+        }
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        formatEnv(env);
+        const newEnv = formatEnv(env);
         createUuid(uuid);
         setLocalStorageItem("guid", guid);
+        setLocalStorageItem("env", env);
         enqueueSnackbar({
             message: "WalkMe Settings Updated",
             variant: "success",
         });
+        if (window._walkMe) {
+            window._walkMe.removeWalkMe()
+            setTimeout(loadWalkMe, 3000, guid, `/${env}`)
+        } else {
+        loadWalkMe(guid, newEnv)
+        }
     };
 
-    function formatEnv(env) {
-        const envString = env ? `/${env}` : "";
-        setLocalStorageItem("env", env);
-        return envString;
+    const handleChange = (event) => {
+        setEnv(event.target.value)
     }
 
     function createUuid(uuid) {
@@ -82,7 +98,7 @@ export function WalkMeForm() {
 
     return (
         <Container maxWidth="sm">
-            <Box component="form" sx={{ mt: 4 }}>
+            <Box component="form" sx={{ m: 1, minWidth: 120 }}>
                 <Typography variant="h5" gutterBottom>
                     WalkMe Configuration
                 </Typography>
@@ -94,14 +110,28 @@ export function WalkMeForm() {
                     value={guid}
                     onChange={(e) => setGuid(e.target.value)}
                 />
-                <TextField
+                <FormControl 
                     fullWidth
                     margin="normal"
-                    label="Please enter Env here"
                     variant="outlined"
+                >
+                <InputLabel 
+                    id="demo-select-small-label"
+                    label="Environment"
+                >Please Enter Environment</InputLabel>
+                <Select
+                    labelId="demo-select-small-label"
+                    id="demo-select-small"
                     value={env}
-                    onChange={(e) => setEnv(e.target.value)}
-                />
+                    onChange={handleChange}
+                    label="Please Enter Environment"
+                >
+                    <MenuItem value="production">Production</MenuItem>
+                    <MenuItem value="test">Test</MenuItem>
+                    <MenuItem value="success">Success</MenuItem>
+                    <MenuItem value="custom">Custom Environment</MenuItem>
+                </Select>
+                </FormControl>
                 <TextField
                     fullWidth
                     margin="normal"

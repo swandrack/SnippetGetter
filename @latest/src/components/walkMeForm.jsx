@@ -10,6 +10,7 @@ import {
     removeLocalStorageItem,
 } from "../utils/storage";
 import { loadWalkMe } from "../utils/loadWalkme";
+import { InternalPanel } from "./InternalPanel";
 
 export function WalkMeForm() {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));

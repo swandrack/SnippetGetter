@@ -4,6 +4,7 @@ import { SnackbarProvider } from "notistack";
 import { loadWalkMe } from "./utils/loadWalkme";
 import { useState, useEffect } from "react"
 import "./index.css";
+import { Box } from "@mui/material";
 
 export default function App() {
     const guid = window.localStorage.getItem("guid");
@@ -21,10 +22,15 @@ export default function App() {
     }
 }, []);
     return (
+        <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
         <SnackbarProvider>
             <div style={{ display: "flex", flexDirection: "row", gap: 4 }}>
                 <WalkMeForm />
             </div>
+            <Box sx={{ display: "flex", width: "400px" }}>
+                <InternalPanel />
+            </Box>
         </SnackbarProvider>
+        </Box>
     );
 }

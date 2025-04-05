@@ -15,12 +15,10 @@ export function InternalPanel() {
                             setWalkmeLoaded(true)
                         }
                     } catch(e) {
-                        console.log(e)
+                        setTimeout(handleWalkMe(), 1500);
                     } finally {
                         setWalkmeInternalsResult(_walkmeInternals)
                     }
-                } else {
-                    setTimeout(handleWalkMe(), 1500);
                 }
             }, timeout)
         }
@@ -31,6 +29,8 @@ export function InternalPanel() {
         for (const key in myObj) {
             if (typeof myObj[key] == 'function') {
                 delete myObj[key]
+            } else if (typeof myObj[key] == "undefined") {
+                delete myObj[key]
             }
         }
     }
@@ -38,7 +38,7 @@ export function InternalPanel() {
     if(walkmeLoaded === false) {
         return(
                 <Typography>
-                    Loading...
+                    Loading WalkMe Internals...
                 </Typography>
         )
     } else {

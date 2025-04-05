@@ -1,5 +1,5 @@
 import { WalkMeForm } from "./components/walkMeForm";
-import { InternalPanel } from "./components/InternalPanel";
+import InternalPanel from "./components/InternalPanel";
 import { SnackbarProvider } from "notistack";
 import { loadWalkMe } from "./utils/loadWalkme";
 import { useState, useEffect } from "react"

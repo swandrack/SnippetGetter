@@ -2,7 +2,7 @@ import { Typography, Box, Paper } from "@mui/material";
 import { useState, useEffect } from "react";
 import ReactJson from "react-json-view";
 
-export default function InternalPanel() {
+function InternalPanel() {
     const [walkmeLoaded, setWalkmeLoaded] = useState(false);
     const [walkmeInternalsResult, setWalkmeInternalsResult] = useState(null);
 
@@ -63,3 +63,4 @@ export default function InternalPanel() {
     }
 }
 
+export default InternalPanel()

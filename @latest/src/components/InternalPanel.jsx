@@ -2,7 +2,7 @@ import { Typography, Box, Paper } from "@mui/material";
 import { useState, useEffect } from "react";
 import ReactJson from "react-json-view";
 
-function InternalPanel() {
+export default function InternalPanel() {
     const [walkmeLoaded, setWalkmeLoaded] = useState(false);
     const [walkmeInternalsResult, setWalkmeInternalsResult] = useState(null);
 
@@ -26,15 +26,17 @@ function InternalPanel() {
     }, [])
 
     function removeBloat(myObj) {
-        for (const key in myObj) {
-            if (typeof myObj[key] == 'function') {
-                delete myObj[key]
-            } else if (typeof myObj[key] == "undefined") {
-                delete myObj[key]
+        const newObj = Object.assign({}, myObj)
+        for (const key in newObj) {
+            if (typeof newObj[key] == 'function') {
+                delete newObj[key]
+            } else if (typeof newObj[key] == "undefined") {
+                delete newObj[key]
             }
         }
+        return newObj
     }
-
+    
     if(walkmeLoaded === false) {
         return(
                 <Typography>
@@ -42,11 +44,10 @@ function InternalPanel() {
                 </Typography>
         )
     } else {
-        removeBloat(walkmeInternalsResult)
         return(
             <Paper elevation={0} variant="outlined" style={{ height: "fit-content", backgroundColor: "#5b5b5b", border: "2px", borderColor: "#5b5b5b" }}>
                 <ReactJson 
-                src={walkmeInternalsResult} 
+                src={removeBloat(walkmeInternalsResult)} 
                 enableClipboard="false" 
                 groupArrayAfterLength="25" 
                 theme="shapeshifter" 
@@ -62,5 +63,3 @@ function InternalPanel() {
         )
     }
 }
-
-export default InternalPanel()

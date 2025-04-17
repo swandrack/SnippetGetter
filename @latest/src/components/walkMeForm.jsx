@@ -10,8 +10,9 @@ import {
     removeLocalStorageItem,
 } from "../utils/storage";
 import { loadWalkMe } from "../utils/loadWalkme";
+import LaunchEnvEx from "./LaunchEnvEx";
 
-export function WalkMeForm() {
+export function WalkMeForm(props) {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
     const [env, setEnv] = useState(getLocalStorageItem("env"));
     const [uuid, setUuid] = useState(getLocalStorageItem("uuid"));
@@ -91,8 +92,8 @@ export function WalkMeForm() {
     useMemo(() => {
         setChartValues([
             { name: "guid", value: guid },
-            { name: "uuid", value: uuid },
             { name: "env", value: env },
+            { name: "uuid", value: uuid },
         ]);
     }, [env, guid, uuid]);
 
@@ -156,6 +157,7 @@ export function WalkMeForm() {
                     >
                         Remove WalkMe
                     </Button>
+                    <LaunchEnvEx walkmeLoaded={props.walkmeLoaded} />
                 </Box>
             </Box>
             {chartValues.filter((arrItem) => arrItem.value !== "").length >

@@ -22,8 +22,7 @@ export function WalkMeForm(props) {
         { name: "env", value: getLocalStorageItem("env") },
     ]);
 
-    const removeWalkMe = (event) => {
-        event.preventDefault();
+    const removeWalkMe = () => {
         let variables = ["env", "guid", "uuid"];
         variables.forEach((localItem) => {
             removeLocalStorageItem(localItem);
@@ -40,6 +39,7 @@ export function WalkMeForm(props) {
                 variant: "warning",
             });
         }
+        window.location.reload()
     };
 
     function formatEnv(env) {
@@ -52,8 +52,7 @@ export function WalkMeForm(props) {
         }
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = () => {
         const newEnv = formatEnv(env);
         createUuid(uuid);
         setLocalStorageItem("guid", guid);
@@ -68,6 +67,7 @@ export function WalkMeForm(props) {
         } else {
         loadWalkMe(guid, newEnv)
         }
+        window.location.reload()
     };
 
     const handleChange = (event) => {

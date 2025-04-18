@@ -13,6 +13,13 @@ export default function InternalPanel(props) {
                 delete newObj[key]
             }
         }
+        try {
+            newObj['Last Publish'] = new Date(wmSnippet.getSettingsFile().PublishDate)
+        } catch(e) {
+            setTimeout(() => {
+                newObj['Last Publish'] = new Date(wmSnippet.getSettingsFile().PublishDate)
+            }, 1000);
+        }
         return newObj
     }
     

@@ -19,11 +19,10 @@ export default function App() {
                     try {
                         if(_walkmeInternals) {
                             setWalkmeLoaded(true)
+                            setWalkmeInternalsResult(_walkmeInternals)
                         }
                     } catch(e) {
                         setTimeout(handleWalkMe(), 1500);
-                    } finally {
-                        setWalkmeInternalsResult(_walkmeInternals)
                     }
                 }
             }, timeout)

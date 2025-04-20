@@ -10,6 +10,7 @@ import {
     removeLocalStorageItem,
 } from "../utils/storage";
 import { loadWalkMe } from "../utils/loadWalkme";
+import WalkMeTools from "./WalkMeTools";
 import LaunchEnvEx from "./LaunchEnvEx";
 
 export function WalkMeForm(props) {

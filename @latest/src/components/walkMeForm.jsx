@@ -158,7 +158,7 @@ export function WalkMeForm(props) {
                     >
                         Remove WalkMe
                     </Button>
-                    <LaunchEnvEx walkmeLoaded={props.walkmeLoaded} />
+                    <WalkMeTools walkmeLoaded={props.walkmeLoaded} />
                 </Box>
             </Box>
             {chartValues.filter((arrItem) => arrItem.value !== "").length >

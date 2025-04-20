@@ -13,7 +13,7 @@ export default function App() {
     const [walkmeInternalsResult, setWalkmeInternalsResult] = useState(null);
 
     useEffect(() => {
-        const handleWalkMe = (timeout) => {
+        const handleWalkMe = () => {
             setTimeout(() => {
                 if(walkmeLoaded == false) {
                     try {
@@ -22,10 +22,10 @@ export default function App() {
                             setWalkmeInternalsResult(_walkmeInternals)
                         }
                     } catch(e) {
-                        setTimeout(handleWalkMe(), 1500);
+                        setTimeout(handleWalkMe(), 250);
                     }
                 }
-            }, timeout)
+            }, 1500)
         }
         handleWalkMe(1500);
     }, [])

@@ -1,42 +1,46 @@
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button } from "@mui/material";
 import { useState } from "react";
 import * as React from "react";
+import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu'
+import '@szhsin/react-menu/dist/index.css';
+import '@szhsin/react-menu/dist/transitions/zoom.css';
 
 export default function WalkMeTools(props) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   if(props.walkmeLoaded === true) {
     return(
         <div>
-          <Button
-            id="menu-button"
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? true : undefined}
-            onClick={handleClick}
-          >
-          WalkMe Tools
-          </Button>
           <Menu
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
+            menuButton={<Button 
+            id="menu-button"
+            variant="outlined"
+            color="alert"
+            >
+            WalkMe Tools
+            </Button>}
           >
-            <MenuItem onClick={WalkMeAPI.launchTracker()}>Launch Flow Tracker</MenuItem>
-            <MenuItem onClick={_walkmeInternals.launchEnvEx()}>Launch EnvEx</MenuItem>
-            <MenuItem onClick={() => {
-              const logLevel = prompt("Please enter log level", "1-5")
-              WalkMeAPI.log.enable(logLevel)
-            }}>
-            Run Logs
-            </MenuItem>
+            <MenuItem onClick={() => {WalkMeAPI.launchTracker()}}>Launch Flow Tracker</MenuItem>
+            <MenuItem onClick={() => {_walkmeInternals.launchEnvEx()}}>Launch EnvEx</MenuItem>
+            <SubMenu label="Logs">
+              <MenuItem onClick={() => {
+                const logLevel = prompt("Please enter log level", "1-5")
+                WalkMeAPI.log.enable(logLevel)
+                }}
+              >
+              Player Logs
+              </MenuItem>
+              <MenuItem onClick={() => {WalkMeAPI.log.disable()}}>Disable Logs</MenuItem>
+              <SubMenu label="Prelib Logs">
+              <MenuItem onClick={() => {
+                console.log("Please refresh page to see prelib logs")
+                _walkmeInternals.ctx.get("PrelibLogger").enableLog()}}>Enable Logs</MenuItem>
+              <MenuItem onClick={() => {
+                _walkmeInternals.ctx.get("PrelibLogger").disableLog()}}>Disable Logs</MenuItem>
+                </SubMenu>
+            </SubMenu>
           </Menu>
         </div>
     )} else {
@@ -48,7 +52,8 @@ export default function WalkMeTools(props) {
             aria-haspopup="true"
             aria-expanded={open ? true : undefined}
             onClick={handleClick}
-            disabled
+            loading
+            loadingPosition="end"
           >
           WalkMe Tools
           </Button>

@@ -22,6 +22,38 @@ export function WalkMeForm(props) {
         { name: "uuid", value: getLocalStorageItem("uuid") },
         { name: "env", value: getLocalStorageItem("env") },
     ]);
+    const [walkmeLoaded, setWalkmeLoaded] = useState(false);
+    const [walkmeInternalsResult, setWalkmeInternalsResult] = useState(null);
+
+    useEffect(() => {
+        const handleWalkMe = () => {
+            setTimeout(() => {
+                if(walkmeLoaded == false) {
+                    try {
+                        if(_walkmeInternals) {
+                            setWalkmeLoaded(true)
+                            setWalkmeInternalsResult(_walkmeInternals)
+                        }
+                    } catch(e) {
+                        setTimeout(handleWalkMe(), 250);
+                    }
+                }
+            }, 1500)
+        }
+        handleWalkMe(1500);
+    }, [])
+
+    useEffect(() => {
+    if (guid != "null") {
+        if (guid != null){
+            if (env == "production" || env == null || env == "null") {
+                loadWalkMe(guid, "")
+            } else {
+                loadWalkMe(guid, `/${env}`)
+            }
+        }
+    }
+}, []);
 
     const removeWalkMe = () => {
         let variables = ["env", "guid", "uuid"];

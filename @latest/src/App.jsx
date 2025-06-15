@@ -5,10 +5,12 @@ import FeedbackForm from "./routes/FeedbackForm"
 
 export default function App() {
     return (
-        <Routes>
-            <Route path="/*" element={<WalkMeForm />} />
-            <Route path="terminal" element={<TerminalController />} />
-            <Route path="/feedback" element={<FeedbackForm />} />
-        </Routes>
+        <div className="App">
+            <Routes>
+                <Route path="/*" element={<WalkMeForm />} />
+                <Route path="terminal" element={<TerminalController />} />
+                <Route path="/feedback" element={<FeedbackForm />} />
+            </Routes>
+        </div>
     );
 }

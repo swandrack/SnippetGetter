@@ -1,11 +1,23 @@
-export default function submitFeedback() {
+export default function submitFeedback(incName, incEmail, incBody, incSubject) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  
+  const raw = JSON.stringify({
+    "name": incName,
+    "email": incEmail,
+    "body": incBody,
+    "subject": incSubject
+  });
+  
   const requestOptions = {
-    method: "GET",
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
     redirect: "follow"
   };
   
-  fetch("https://feedback-api-psi.vercel.app/", requestOptions)
+  fetch("https://snippet-getter-beta.vercel.app/api/feedback", requestOptions)
     .then((response) => response.text())
     .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+    .catch((error) => console.error(error))
 }

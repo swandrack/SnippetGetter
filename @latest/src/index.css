@@ -157,3 +157,12 @@ input.removeWalkMeButton {
     overflow: hidden !important;
     
 }
+
+#feedback-form {
+    width: 450px;
+}
+
+.align-right {
+    left: calc(100% - 250px) !important;
+    width: 125px !important;
+}

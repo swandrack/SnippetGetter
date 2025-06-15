@@ -8,7 +8,7 @@ export default function App() {
         <Routes>
             <Route path="/*" element={<WalkMeForm />} />
             <Route path="terminal" element={<TerminalController />} />
-            <Route path="feedback" element={<FeedbackForm />} />
+            <Route path="/feedback" element={<FeedbackForm />} />
         </Routes>
     );
 }

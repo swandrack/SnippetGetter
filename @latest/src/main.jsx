@@ -12,7 +12,7 @@ ReactDOM.createRoot(root).render(
         <Routes>
             <Route path="/" element={<App />} />
             <Route path="terminal" element={<TerminalController />} />
-            <Route path="/feedback" element={<FeedbackForm />} />
+            <Route path="feedback" element={<FeedbackForm />} />
         </Routes>
     </BrowserRouter>
 );

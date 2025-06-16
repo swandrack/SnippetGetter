@@ -8,13 +8,11 @@ export default function App() {
     return (
         <div className="App">
             <Header />
-            <Router>
                 <Routes>
                     <Route path="/" element={<WalkMeForm />} />
                     <Route path="terminal" element={<TerminalController />} />
                     <Route path="/feedback" element={<FeedbackForm />} />
                 </Routes>
-            </Router>
         </div>
     );
 }

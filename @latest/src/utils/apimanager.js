@@ -1,4 +1,4 @@
-export default function submitFeedback(incName, incEmail, incBody, incSubject) {
+export default function submitFeedback(incName, incEmail, incSubject, incBody) {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   

@@ -16,7 +16,7 @@ export default function submitFeedback(incName, incEmail, incBody, incSubject) {
     redirect: "follow"
   };
   
-  fetch("https://snippet-getter-beta.vercel.app/api/feedback", requestOptions)
+  fetch("https://feedbackapi-uvru.onrender.com", requestOptions)
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.error(error))

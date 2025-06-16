@@ -23,11 +23,9 @@ export default function submitFeedback(incName, incEmail, incSubject, incBody) {
 }
 
 export function loadAPI() {
-  const raw = "";
 
   const requestOptions = {
     method: "GET",
-    body: raw,
     redirect: "follow"
   };
 

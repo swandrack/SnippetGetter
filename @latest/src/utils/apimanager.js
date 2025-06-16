@@ -16,7 +16,7 @@ export default function submitFeedback(incName, incEmail, incBody, incSubject) {
     redirect: "follow"
   };
   
-  fetch("https://api.render.com/deploy/srv-d182klidbo4c73d7ipug?key=OiH8Hx_U714", requestOptions)
+  fetch("https://feedbackapi-uvru.onrender.com", requestOptions)
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.error(error))

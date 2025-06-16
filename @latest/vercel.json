@@ -1,9 +1,0 @@
-{
-  "$schema": "https://snippet-getter-beta.vercel.app/vercel.json",
-  "name": "Snippet Getter",
-  "functions": {
-    "feedback": {
-      "memory": 1024
-    }
-  }
-}

@@ -1,6 +1,6 @@
 {
   "$schema": "https://snippet-getter-beta.vercel.app/vercel.json",
-  "name": "Snippet Getter"
+  "name": "Snippet Getter",
   "functions": {
     "api/**/*.js": {
       "memory": 1024

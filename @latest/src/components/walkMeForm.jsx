@@ -12,6 +12,7 @@ import {
 import { loadWalkMe } from "../utils/loadWalkme";
 import WalkMeTools from "./WalkMeTools";
 import LaunchEnvEx from "./LaunchEnvEx";
+import { loadAPI } from "../utils/apimanager";
 
 export function WalkMeForm(props) {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
@@ -24,6 +25,14 @@ export function WalkMeForm(props) {
     ]);
     const [walkmeLoaded, setWalkmeLoaded] = useState(false);
     const [walkmeInternalsResult, setWalkmeInternalsResult] = useState(null);
+
+    useEffect(() => {
+        try {
+            loadAPI();
+        } catch(e) {
+            console.log(e)
+        }
+    })
 
     useEffect(() => {
         const handleWalkMe = () => {

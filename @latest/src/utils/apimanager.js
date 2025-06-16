@@ -21,3 +21,18 @@ export default function submitFeedback(incName, incEmail, incSubject, incBody) {
     .then((result) => console.log(result))
     .catch((error) => console.error(error))
 }
+
+export function loadAPI() {
+  const raw = "";
+
+  const requestOptions = {
+    method: "GET",
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://feedbackapi-uvru.onrender.com/api/feedback", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}

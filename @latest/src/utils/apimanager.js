@@ -18,6 +18,9 @@ export default function submitFeedback(incName, incEmail, incSubject, incBody) {
   
   fetch("https://feedbackapi-uvru.onrender.com", requestOptions)
     .then((response) => response.text())
+    .then(response => {
+      window.location.href = response.url
+    })
     .then((result) => console.log(result))
     .catch((error) => console.error(error))
 }

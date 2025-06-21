@@ -98,7 +98,7 @@ export function WalkMeForm(props) {
         const newEnv = formatEnv(env);
         createUuid(uuid);
         setLocalStorageItem("guid", guid);
-        setLocalStorageItem("env", env);
+        if (env === "custom") {setLocalStorageItem("env", customEnv);
         enqueueSnackbar({
             message: "WalkMe Settings Updated",
             variant: "success",

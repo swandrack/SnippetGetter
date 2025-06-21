@@ -111,6 +111,7 @@ export function WalkMeForm(props) {
         }
         window.location.reload()
     };
+}
 
     const handleChange = (event) => {
         setEnv(event.target.value)

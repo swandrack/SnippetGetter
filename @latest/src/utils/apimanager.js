@@ -16,14 +16,19 @@ export default function submitFeedback(incName, incEmail, incSubject, incBody) {
     redirect: "follow"
   };
   
-  fetch("https://feedbackapi-uvru.onrender.com", requestOptions)
-    .then((response) => response.text())
-    .then(response => {
-      window.location.href = response.url
-    })
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error))
+  async function getData() {
+    const response = await fetch("https://feedbackapi-uvru.onrender.com", requestOptions)
+    const data = await response.json();
+    return data;
+  }
+  try {
+  getData().then(data => window.location.pathname = data.url)
+  } catch(e) {
+    console.log(e)
+  }
+
 }
+
 
 export function loadAPI() {
 

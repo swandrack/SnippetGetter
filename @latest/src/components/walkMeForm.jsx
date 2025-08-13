@@ -11,7 +11,6 @@ import {
 } from "../utils/storage";
 import { loadWalkMe } from "../utils/loadWalkme";
 import WalkMeTools from "./WalkMeTools";
-import LaunchEnvEx from "./LaunchEnvEx";
 import { loadAPI } from "../utils/apimanager";
 
 export function WalkMeForm(props) {
@@ -24,7 +23,6 @@ export function WalkMeForm(props) {
         { name: "env", value: getLocalStorageItem("env") },
     ]);
     const [walkmeLoaded, setWalkmeLoaded] = useState(false);
-    const [walkmeInternalsResult, setWalkmeInternalsResult] = useState(null);
 
     useEffect(() => {
         try {
@@ -200,7 +198,7 @@ export function WalkMeForm(props) {
                     >
                         Remove WalkMe
                     </Button>
-                    <WalkMeTools walkmeLoaded={props.walkmeLoaded} />
+                    <WalkMeTools walkmeLoaded={walkmeLoaded} />
                 </Box>
             </Box>
             {chartValues.filter((arrItem) => arrItem.value !== "").length >

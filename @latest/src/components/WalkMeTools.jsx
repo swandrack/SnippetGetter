@@ -1,23 +1,43 @@
-import { Button } from "@mui/material";
-import { useState } from "react";
+import { Button, useTheme } from "@mui/material";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/zoom.css';
+import {ThemeProvider} from "@mui/material";
+import theme from "../utils/ThemeManager";
 
 export default function WalkMeTools(props) {
+  const theme = useTheme();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+/**** Wait for WalkMe to be loaded before showing tools ****/
+/*  const [walkmeLoaded, setWalkMeLoaded] = useState(false)
+  const handleWalkMe = () => {
+    try {
+      if (props.walkmeLoaded = true) {
+        setWalkMeLoaded(true)
+      }
+    }
+    catch(e) {
+      setTimeout(() => {
+        handleWalkMe()
+      }, 500);
+    }
+  }
 
+  useEffect(() => {
+    handleWalkMe()
+  }, [])
+*/
   if(props.walkmeLoaded === true) {
     return(
-        <div>
+        <ThemeProvider theme={theme}>
           <Menu
             menuButton={<Button 
             id="menu-button"
             variant="outlined"
-            color="alert"
             >
             WalkMe Tools
             </Button>}
@@ -42,7 +62,7 @@ export default function WalkMeTools(props) {
                 </SubMenu>
             </SubMenu>
           </Menu>
-        </div>
+        </ThemeProvider>
     )} else {
       return(
         <div>

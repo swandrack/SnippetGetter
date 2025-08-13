@@ -166,3 +166,9 @@ input.removeWalkMeButton {
     left: calc(100% - 250px) !important;
     width: 125px !important;
 }
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

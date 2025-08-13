@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import { Select, MenuItem } from "@mui/material"
+import { Select, MenuItem, Button } from "@mui/material"
 import { useState } from "react";
 
 function Header() {
@@ -10,23 +10,23 @@ function Header() {
 }
 
   return(
-    <nav>
-      <Select
-      value={page}
+    <nav class="topnav">
+      <Button 
+      value="Home"
       variant="outlined"
-      onChange={handleChange}
-      >
-        <MenuItem value="Feedback">
-          <Link to="/feedback">
-            Submit Feedback
-          </Link>
-        </MenuItem>
-        <MenuItem value="Home">
-          <Link to="/">
-            Home
-          </Link>
-        </MenuItem>
-      </Select>
+      color="info">
+        <Link to="/">
+          Home
+        </Link>
+      </Button>
+      <Button 
+      value="Feedback"
+      variant="outlined"
+      color="info">
+        <Link to="/feedback">
+          Submit Feedback
+        </Link>
+      </Button>
     </nav>
   )
 }

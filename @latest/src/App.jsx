@@ -4,6 +4,7 @@ import { TerminalController } from "./components/Terminal";
 import FeedbackSubmitted from "./routes/FeedbackSubmitted";
 import FeedbackForm from "./routes/FeedbackForm"
 import Header from "./components/Header";
+import Modal from "./components/Modal";
 
 export default function App() {
     return (

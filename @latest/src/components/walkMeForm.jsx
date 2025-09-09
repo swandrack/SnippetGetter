@@ -12,6 +12,7 @@ import {
 import { loadWalkMe } from "../utils/loadWalkme";
 import WalkMeTools from "./WalkMeTools";
 import { loadAPI } from "../utils/apimanager";
+import SiteTools from "./SiteTools";
 
 export function WalkMeForm(props) {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
@@ -209,6 +210,9 @@ export function WalkMeForm(props) {
             )}
             <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                 <Link style={{color:"black"}} to="/terminal">Terminal</Link>
+            </Box>
+            <Box>
+                <SiteTools></SiteTools>
             </Box>
         </Container>
     );

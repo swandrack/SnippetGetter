@@ -5,35 +5,22 @@ import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/zoom.css';
 import {ThemeProvider} from "@mui/material";
-import theme from "../utils/ThemeManager";
+import Modal from "./Modal";
 
 export default function WalkMeTools(props) {
   const theme = useTheme();
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget)
   };
-/**** Wait for WalkMe to be loaded before showing tools ****/
-/*  const [walkmeLoaded, setWalkMeLoaded] = useState(false)
-  const handleWalkMe = () => {
-    try {
-      if (props.walkmeLoaded = true) {
-        setWalkMeLoaded(true)
-      }
-    }
-    catch(e) {
-      setTimeout(() => {
-        handleWalkMe()
-      }, 500);
-    }
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {setIsModalOpen(true)};
+  const closeModal = () => setIsModalOpen(false);
 
-  useEffect(() => {
-    handleWalkMe()
-  }, [])
-*/
+
   if(props.walkmeLoaded === true) {
     return(
         <ThemeProvider theme={theme}>
+          <Modal isOpen={isModalOpen} onClose={closeModal} />
           <Menu
             menuButton={<Button 
             id="menu-button"
@@ -42,6 +29,9 @@ export default function WalkMeTools(props) {
             WalkMe Tools
             </Button>}
           >
+            <MenuItem onClick={() => {
+              setIsModalOpen(true)}
+              }>Launch iFrame</MenuItem>
             <MenuItem onClick={() => {WalkMeAPI.launchTracker()}}>Launch Flow Tracker</MenuItem>
             <MenuItem onClick={() => {_walkmeInternals.launchEnvEx()}}>Launch EnvEx</MenuItem>
             <SubMenu label="Logs">

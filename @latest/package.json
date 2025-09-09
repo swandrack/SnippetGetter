@@ -12,8 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@headlessui/react": "^2.2.7",
     "@mui/material": "^6.4.6",
     "@szhsin/react-menu": "^4.4.0",
+    "headlessui": "^0.0.0",
     "notistack": "^3.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -10,7 +10,7 @@ function Header() {
 }
 
   return(
-    <nav class="topnav">
+    <nav className="topnav">
       <Button 
       value="Home"
       variant="outlined"

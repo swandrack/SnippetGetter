@@ -13,7 +13,6 @@ export default function WalkMeTools(props) {
     setAnchorEl(event.currentTarget)
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => {setIsModalOpen(true)};
   const closeModal = () => setIsModalOpen(false);
 
 

@@ -1,8 +1,7 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { Button } from "@mui/material";
-import { useState } from "react";
 
-export default function Modal({isOpen, onClose, children}) {
+export default function Modal({isOpen, onClose}) {
 
   if (!isOpen) {
     return null

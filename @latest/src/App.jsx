@@ -10,12 +10,12 @@ export default function App() {
     return (
         <div className="App">
             <Header />
-                <Routes>
-                    <Route path="/" element={<WalkMeForm />} />
-                    <Route path="terminal" element={<TerminalController />} />
-                    <Route path="/feedback" element={<FeedbackForm />} />
-                    <Route path="/submitted" element={<FeedbackSubmitted />} />
-                </Routes>
+            <Routes>
+                <Route path="/" element={<WalkMeForm />} />
+                <Route path="/terminal" element={<TerminalController />} />
+                <Route path="/feedback" element={<FeedbackForm />} />
+                <Route path="/submitted" element={<FeedbackSubmitted />} />
+            </Routes>
         </div>
     );
 }

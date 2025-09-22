@@ -1,3 +1,5 @@
+/*** REMOVE THIS FILE ***/
+/*
 import { Typography, Box, Paper, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import ReactJson from "react-json-view";
@@ -66,3 +68,4 @@ export default function InternalPanel(props) {
         )
     }
 }
+    */

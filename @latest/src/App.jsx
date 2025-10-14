@@ -5,6 +5,7 @@ import FeedbackSubmitted from "./routes/FeedbackSubmitted";
 import FeedbackForm from "./routes/FeedbackForm"
 import Header from "./components/Header";
 import Modal from "./components/Modal";
+import { SnackbarProvider } from "notistack";
 
 export default function App() {
     return (

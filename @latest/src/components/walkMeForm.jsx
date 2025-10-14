@@ -1,27 +1,26 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { TextField, Button, Box, Typography, Container, InputLabel, MenuItem, Select, FormControl } from "@mui/material";
-import { enqueueSnackbar } from "notistack";
-import { SettingsDisplay } from "./SettingsDisplay";
-import { setWindowVariable } from "../utils/uuid";
-import { Form, Link } from "react-router-dom";
+/* import { enqueueSnackbar, SnackbarProvider } from "notistack";*/
+import { Link } from "react-router-dom";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
     removeLocalStorageItem,
 } from "../utils/storage";
-import { loadWalkMe } from "../utils/loadWalkme";
+import { 
+    loadWalkMe, 
+    formatEnv, 
+    setWindowVariable 
+} from "../utils/loadWalkme";
 import WalkMeTools from "./WalkMeTools";
 import { loadAPI } from "../utils/apimanager";
+import { combineEnvs } from "../utils/loadWalkme";
 
-export function WalkMeForm(props) {
+export function WalkMeForm() {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
     const [env, setEnv] = useState(getLocalStorageItem("env"));
     const [uuid, setUuid] = useState(getLocalStorageItem("uuid"));
-    const [chartValues, setChartValues] = useState([
-        { name: "guid", value: getLocalStorageItem("guid") },
-        { name: "uuid", value: getLocalStorageItem("uuid") },
-        { name: "env", value: getLocalStorageItem("env") },
-    ]);
+    const [customEnv, setCustomEnv] = useState()
     const [walkmeLoaded, setWalkmeLoaded] = useState(false);
 
     useEffect(() => {
@@ -30,7 +29,7 @@ export function WalkMeForm(props) {
         } catch(e) {
             console.log(e)
         }
-    })
+    }, [])
 
     useEffect(() => {
         const handleWalkMe = () => {
@@ -51,15 +50,15 @@ export function WalkMeForm(props) {
     }, [])
 
     useEffect(() => {
-    if (guid != "null") {
-        if (guid != null){
-            if (env == "production" || env == null || env == "null") {
-                loadWalkMe(guid, "")
-            } else {
-                loadWalkMe(guid, `/${env}`)
+        if (guid != "null") {
+            if (guid != null){
+                if (env != "production" && env != null && env != "null" && env != "") {
+                    loadWalkMe(guid, `/${env}`)
+                } else {
+                    loadWalkMe(guid, "")
+                }
             }
         }
-    }
 }, []);
 
     const removeWalkMe = () => {
@@ -72,44 +71,34 @@ export function WalkMeForm(props) {
         setUuid("");
         try {
             window._walkMe.removeWalkMe();
-            enqueueSnackbar({ message: "WalkMe Removed!", variant: "success" });
+            /*enqueueSnackbar({ message: "WalkMe Removed!", variant: "success" });*/
         } catch (error) {
-            enqueueSnackbar({
+            /*enqueueSnackbar({
                 message: `Error removing WalkMe: ${error}`,
                 variant: "warning",
-            });
+            });*/
+            console.log(error)
         }
         window.location.reload()
     };
 
-    function formatEnv(env) {
-        if (env != "production") {
-            const customEnv = `/${env}`
-            return customEnv
-        } else {
-            const customEnv = ""
-            return customEnv
-        }
-    }
-
     const handleSubmit = () => {
-        const newEnv = formatEnv(env);
+        const newEnv = combineEnvs(formatEnv(env));
         createUuid(uuid);
         setLocalStorageItem("guid", guid);
-        if (env === "custom") {setLocalStorageItem("env", customEnv);
-        enqueueSnackbar({
+        setLocalStorageItem("env", customEnv ? customEnv : env)
+        /*enqueueSnackbar({
             message: "WalkMe Settings Updated",
             variant: "success",
-        });
+        });*/
         if (window._walkMe) {
             window._walkMe.removeWalkMe()
-            setTimeout(loadWalkMe, 3000, guid, `/${env}`)
+            setTimeout(loadWalkMe, 3000, guid, newEnv)
         } else {
         loadWalkMe(guid, newEnv)
         }
         window.location.reload()
     };
-}
 
     const handleChange = (event) => {
         setEnv(event.target.value)
@@ -129,14 +118,6 @@ export function WalkMeForm(props) {
             setLocalStorageItem("uuid", "none");
         }
     }
-
-    useMemo(() => {
-        setChartValues([
-            { name: "guid", value: guid },
-            { name: "env", value: env },
-            { name: "uuid", value: uuid },
-        ]);
-    }, [env, guid, uuid]);
 
     return (
         <Container maxWidth="sm">
@@ -173,6 +154,16 @@ export function WalkMeForm(props) {
                     <MenuItem value="success">Success</MenuItem>
                     <MenuItem value="custom">Custom Environment</MenuItem>
                 </Select>
+                {env == 'custom' &&
+                    <TextField
+                    fullWidth
+                    margin="normal"
+                    label="Please add custom env name here"
+                    variant="outlined"
+                    value={customEnv}
+                    onChange={(e) => setCustomEnv(e.target.value)}
+                />
+                }
                 </FormControl>
                 <TextField
                     fullWidth
@@ -201,12 +192,6 @@ export function WalkMeForm(props) {
                     <WalkMeTools walkmeLoaded={walkmeLoaded} />
                 </Box>
             </Box>
-            {chartValues.filter((arrItem) => arrItem.value !== "").length >
-                0 && (
-                <Box sx={{ mt: 16 }}>
-                    <SettingsDisplay values={chartValues} />
-                </Box>
-            )}
             <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                 <Link style={{color:"black"}} to="/terminal">Terminal</Link>
             </Box>

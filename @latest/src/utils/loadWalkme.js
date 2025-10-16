@@ -3,7 +3,10 @@ export function loadWalkMe(dc, guid, env) {
     walkme.type = "text/javascript";
     walkme.async = true;
     switch (dc) {
-        case "US":
+        case "US": 
+        case null:
+        case "null":
+        case "":
             walkme.src = `https://cdn.walkme.com/users/${guid}${env}/walkme_${guid}_https.js`;
             break;
         case "EU":

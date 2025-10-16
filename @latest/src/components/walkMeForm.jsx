@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { TextField, Button, Box, Typography, Container, InputLabel, MenuItem, Select, FormControl } from "@mui/material";
 /* import { enqueueSnackbar, SnackbarProvider } from "notistack";*/
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ import {
 import WalkMeTools from "./WalkMeTools";
 import { loadAPI } from "../utils/apimanager";
 import { combineEnvs } from "../utils/loadWalkme";
+import DatacenterDropdown from "./DatacenterDropdown";
 
 export function WalkMeForm() {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
@@ -22,6 +23,7 @@ export function WalkMeForm() {
     const [uuid, setUuid] = useState(getLocalStorageItem("uuid"));
     const [customEnv, setCustomEnv] = useState()
     const [walkmeLoaded, setWalkmeLoaded] = useState(false);
+    const [dc, setDc] = useState(getLocalStorageItem("dc"))
 
     useEffect(() => {
         try {
@@ -53,13 +55,17 @@ export function WalkMeForm() {
         if (guid != "null") {
             if (guid != null){
                 if (env != "production" && env != null && env != "null" && env != "") {
-                    loadWalkMe(guid, `/${env}`)
+                    loadWalkMe(dc, guid, `/${env}`)
                 } else {
-                    loadWalkMe(guid, "")
+                    loadWalkMe(dc, guid, "")
                 }
             }
         }
 }, []);
+
+    const handleDc = (data) => {
+        setDc(data)
+    }
 
     const removeWalkMe = () => {
         let variables = ["env", "guid", "uuid"];
@@ -83,10 +89,13 @@ export function WalkMeForm() {
     };
 
     const handleSubmit = () => {
+        
         const newEnv = combineEnvs(formatEnv(env));
+
         createUuid(uuid);
         setLocalStorageItem("guid", guid);
         setLocalStorageItem("env", customEnv ? customEnv : env)
+        setLocalStorageItem("dc", dc)
         /*enqueueSnackbar({
             message: "WalkMe Settings Updated",
             variant: "success",
@@ -95,7 +104,7 @@ export function WalkMeForm() {
             window._walkMe.removeWalkMe()
             setTimeout(loadWalkMe, 3000, guid, newEnv)
         } else {
-        loadWalkMe(guid, newEnv)
+        loadWalkMe(dc, guid, newEnv)
         }
         window.location.reload()
     };
@@ -125,6 +134,7 @@ export function WalkMeForm() {
                 <Typography variant="h5" gutterBottom>
                     WalkMe Configuration
                 </Typography>
+                <DatacenterDropdown sendDataToParent={handleDc} data={dc} />
                 <TextField
                     fullWidth
                     margin="normal"

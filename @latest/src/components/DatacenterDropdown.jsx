@@ -1,8 +1,8 @@
 import { Select, MenuItem, InputLabel, FormControl } from "@mui/material"
 import { useState, useEffect } from "react";
-import { getLocalStorageItem, setLocalStorageItem } from "../utils/storage";
+import { getLocalStorageItem } from "../utils/storage";
 
-export default function DatacenterDropdown({ data, sendDataToParent }) {
+export default function DatacenterDropdown({ sendDataToParent }) {
   
   const [dc, setDc] = useState(getLocalStorageItem("dc"))
 

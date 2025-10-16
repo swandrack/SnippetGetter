@@ -1,8 +1,16 @@
-# React + Vite
+# Snippet Getter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## The goal of Snippet Getter is to provide a baseline for troubleshooting, as well as quick access to many troubleshooting tools
 
-Currently, two official plugins are available:
+### Tools List:
+  - Player Logs
+  - Prelib Logger
+  - Cross Domain iFrame and Modal for embed features
+  - EnvEx
+  - Flow tracker
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### How to use:
+  1. Select the Data Center for the system you'd like to load
+  2. Enter the GUID for the system you'd like to load
+  3. Enter the environment you'd like to load
+  4. If a UUID is required, enter the variable name into the final text box

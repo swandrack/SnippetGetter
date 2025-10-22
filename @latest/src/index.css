@@ -228,3 +228,7 @@ nav {
 .modal-title {
     justify-self: center;
 }
+
+.react-terminal {
+    white-space: pre-wrap;
+}

@@ -14,10 +14,18 @@ export function TerminalController() {
     function onInput(input) {
         let ld = [...terminalLineData];
         ld.push(<TerminalInput>{input}</TerminalInput>);
+        const echoRegex = /echo.*/
         if (input.toLocaleLowerCase().trim() === "clear") {
-            ld = [];
-        } else if (input) {
-            ld.push(<TerminalOutput>Unrecognized command</TerminalOutput>);
+                ld = []
+        } else if (input.toLocaleLowerCase().trim() === "help") {
+                const helpText = 'Available commands: \n- help \n- echo [text]\n- about';
+                ld.push(helpText)
+        } else if (input.toLocaleLowerCase().trim().match(echoRegex)) {
+                const splitted = input.split(' ')
+                splitted.shift()
+                ld.push(splitted.join(" "))
+        } else {
+                ld.push("Unrecognized command, use 'help' to see a full list of commands")
         }
         setTerminalLineData(ld);
     }

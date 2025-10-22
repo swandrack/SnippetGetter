@@ -24,6 +24,8 @@ export function TerminalController() {
                 const splitted = input.split(' ')
                 splitted.shift()
                 ld.push(splitted.join(" "))
+        } else if (input.toLocaleLowerCase().trim() === "about") {
+                ld.push("I'm not sure what to put here, so enjoy reading this sentence :)")
         } else {
                 ld.push("Unrecognized command, use 'help' to see a full list of commands")
         }

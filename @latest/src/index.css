@@ -232,3 +232,7 @@ nav {
 .react-terminal {
     white-space: pre-wrap;
 }
+
+.react-terminal-line {
+    white-space: pre-wrap !important;
+}

@@ -255,7 +255,7 @@ nav {
     border-style: solid;
     border-width: thin;
     max-width: 230px !important;
-    top: 0px;
+    top: 0;
     text-align: center;
 }
 

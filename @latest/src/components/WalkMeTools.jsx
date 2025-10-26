@@ -34,6 +34,7 @@ export default function WalkMeTools(props) {
             <MenuItem onClick={() => {WalkMeAPI.launchTracker()}}>Launch Flow Tracker</MenuItem>
             <MenuItem onClick={() => {_walkmeInternals.launchEnvEx()}}>Launch EnvEx</MenuItem>
             <SubMenu label="Logs">
+              <SubMenu label="Player Logs">
               <MenuItem onClick={() => {
                 const logLevel = prompt("Please enter log level", "1-5")
                 WalkMeAPI.log.enable(logLevel)
@@ -42,6 +43,7 @@ export default function WalkMeTools(props) {
               Player Logs
               </MenuItem>
               <MenuItem onClick={() => {WalkMeAPI.log.disable()}}>Disable Logs</MenuItem>
+              </SubMenu>
               <SubMenu label="Prelib Logs">
               <MenuItem onClick={() => {
                 console.log("Please refresh page to see prelib logs")

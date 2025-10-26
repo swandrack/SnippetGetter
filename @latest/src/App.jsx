@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Modal from "./components/Modal";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
+import Sidebar from "./components/Sidebar";
 
 export default function App() {
     const [isModalOpen, setIsModalOpen] = useState()
@@ -14,7 +15,7 @@ export default function App() {
 
     return (
         <div className="App">
-            <Header />
+            <Sidebar />
             <Routes>
                 <Route path="/" element={<WalkMeForm />} />
                 <Route path="/terminal" element={<TerminalController isOpen={isModalOpen} onClose={closeModal} />} />

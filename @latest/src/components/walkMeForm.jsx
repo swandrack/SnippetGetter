@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { TextField, Button, Box, Typography, Container, InputLabel, MenuItem, Select, FormControl } from "@mui/material";
-/* import { enqueueSnackbar, SnackbarProvider } from "notistack";*/
 import { Link } from "react-router-dom";
 import {
     getLocalStorageItem,
@@ -77,12 +76,7 @@ export function WalkMeForm() {
         setUuid("");
         try {
             window._walkMe.removeWalkMe();
-            /*enqueueSnackbar({ message: "WalkMe Removed!", variant: "success" });*/
         } catch (error) {
-            /*enqueueSnackbar({
-                message: `Error removing WalkMe: ${error}`,
-                variant: "warning",
-            });*/
             console.log(error)
         }
         window.location.reload()
@@ -96,10 +90,6 @@ export function WalkMeForm() {
         setLocalStorageItem("guid", guid);
         setLocalStorageItem("env", customEnv ? customEnv : env)
         setLocalStorageItem("dc", dc)
-        /*enqueueSnackbar({
-            message: "WalkMe Settings Updated",
-            variant: "success",
-        });*/
         if (window._walkMe) {
             window._walkMe.removeWalkMe()
             setTimeout(loadWalkMe, 3000, guid, newEnv)
@@ -190,7 +180,7 @@ export function WalkMeForm() {
                         color="secondary"
                         onClick={handleSubmit}
                     >
-                        Submit
+                        Load WalkMe
                     </Button>
                     <Button
                         variant="outlined"
@@ -201,9 +191,6 @@ export function WalkMeForm() {
                     </Button>
                     <WalkMeTools walkmeLoaded={walkmeLoaded} />
                 </Box>
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-                <Link style={{color:"black"}} to="/terminal">Terminal</Link>
             </Box>
         </Container>
     );

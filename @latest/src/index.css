@@ -236,3 +236,34 @@ nav {
 .react-terminal-line {
     white-space: pre-wrap !important;
 }
+
+#centered {
+    position: relative;
+    display: inline;
+    padding: 10px;
+    margin:10px;
+    top: 15px;
+    width: auto;
+}
+
+.sidebar-container {
+    left: 0px;
+    display: inline-block;
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    border-style: solid;
+    border-width: thin;
+    max-width: 230px !important;
+    top: 0px;
+    text-align: center;
+}
+
+#icon {
+    width: 20px;
+}
+
+.sidebar-button {
+    margin-top: 10px !important;
+    text-align: left;
+}

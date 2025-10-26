@@ -4,6 +4,7 @@ import Terminal, {
     TerminalInput,
 } from "react-terminal-ui";
 import CreateModal from "./CreateModal"
+import { useNavigate } from "react-router";
 
 export function TerminalController({ isOpen, onClose }) {
     const [terminalLineData, setTerminalLineData] = useState([
@@ -14,6 +15,21 @@ export function TerminalController({ isOpen, onClose }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const closeModal = () => setIsModalOpen(false);
     var splitted = []
+    const navigate = useNavigate()
+
+    const toHome = (event) => {
+        event.preventDefault()
+        navigate('/')
+    }
+
+    const toFeedback = (event) => {
+        event.preventDefault()
+        navigate('/feedback')
+    }
+
+    const clearData = () => {
+        setTerminalLineData([])
+    }
 
     function onInput(input) {
         let ld = [...terminalLineData];
@@ -122,6 +138,9 @@ export function TerminalController({ isOpen, onClose }) {
                 name="WALKMECTL"
                 colorMode="Dark"
                 onInput={onInput}
+                redBtnCallback={toHome}
+                yellowBtnCallback={toFeedback}
+                greenBtnCallback={clearData}
             >
                 {terminalLineData}
             </Terminal>

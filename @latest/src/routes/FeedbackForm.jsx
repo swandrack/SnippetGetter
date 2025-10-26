@@ -1,6 +1,7 @@
 import { Button,Box, FormControl, TextField, Typography } from '@mui/material'
 import submitFeedback from '../utils/apimanager'
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 export default function FeedbackForm() {
   const [name, setName] = useState('')
@@ -11,6 +12,8 @@ export default function FeedbackForm() {
   function submitForm() {
     submitFeedback(name, email, subject, body);
   }
+
+  const navigation = useNavigate();
 
   function clearForm() {
     setBody("")

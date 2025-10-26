@@ -10,22 +10,14 @@ export default function theme() {
   }
 
   const theme = createTheme({
-    components: {
-      // Name of the component
-      MuiButtonBase: {
-        styleOverrides: {
-          root: {
-            variants: [{
-              props: {
-                variant: "outlined",
-                color: flowerBoy.lightTertiary
-              }
-            },
-          ]
-            },
-          },
-        },
+    direction: "rtl",
+    palette: {
+      primary: {
+        main: flowerBoy.main
       },
-    },
-  )
+      secondary: {
+        main: flowerBoy.secondary
+      }
+    }
+  })
 }

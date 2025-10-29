@@ -58,6 +58,9 @@ export function TerminalController({ isOpen, onClose }) {
         } else if (input.toLocaleLowerCase().trim().match(magic8)) {
             const num = (max) => Math.floor(Math.random() * max)
             switch (num(20)) {
+                case 0:
+                    ld.push("Concentrate and ask again")
+                    break;
                 case 1:
                     ld.push("It is certain");
                     break;
@@ -114,9 +117,6 @@ export function TerminalController({ isOpen, onClose }) {
                     break;
                 case 19:
                     ld.push("Cannot predict now");
-                    break;
-                case 20:
-                    ld.push("Concentrate and ask again")
                     break;
             }
         } else {

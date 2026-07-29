@@ -14,8 +14,7 @@ export default function Modal({isOpen, onClose}, isCrossDomain) {
             <DialogPanel className="inner-modal-wrapper">
               <DialogTitle className="font-bold modal-title">iFrame Window</DialogTitle>
               <div className="iframe-container">
-                <iframe className="samedomain-iframe">
-                  <h2>This is some text</h2>
+                <iframe className="samedomain-iframe wikipedia-iframe" src="/feedback">
                 </iframe>
               </div>
               <div className="button-container">

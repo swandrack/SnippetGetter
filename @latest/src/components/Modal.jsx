@@ -1,14 +1,38 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { Button } from "@mui/material";
 
-export default function Modal({isOpen, onClose}) {
+export default function Modal({isOpen, onClose}, isCrossDomain) {
 
   if (!isOpen) {
     return null
   }
   else {
-    return(
-      <Dialog open={isOpen} onClose={onClose}>
+      if (!isCrossDomain) {
+        return(
+        <Dialog open={isOpen} onClose={onClose}>
+          <div className="modal-overlay" onClick={onClose}>
+            <DialogPanel className="inner-modal-wrapper">
+              <DialogTitle className="font-bold modal-title">iFrame Window</DialogTitle>
+              <div className="iframe-container">
+                <iframe className="samedomain-iframe">
+                  <h2>This is some text</h2>
+                </iframe>
+              </div>
+              <div className="button-container">
+                <Button 
+                onClick={onClose} 
+                id="modal-close-button"
+                variant="outlined"
+                color="alert"
+                >Close</Button>
+              </div>
+            </DialogPanel>
+          </div>
+        </Dialog>
+        )
+      } else {
+        return(
+        <Dialog open={isOpen} onClose={onClose}>
         <div className="modal-overlay" onClick={onClose}>
           <DialogPanel className="inner-modal-wrapper">
             <DialogTitle className="font-bold modal-title">iFrame Window</DialogTitle>
@@ -26,6 +50,7 @@ export default function Modal({isOpen, onClose}) {
           </DialogPanel>
         </div>
       </Dialog>
-    )
+      )
   }
+}
 }

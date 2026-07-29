@@ -13,13 +13,14 @@ export default function WalkMeTools(props) {
     setAnchorEl(event.currentTarget)
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCrossDomain, setIsCrossDomain] = useState(true);
   const closeModal = () => setIsModalOpen(false);
 
 
   if(props.walkmeLoaded === true) {
     return(
         <ThemeProvider theme={theme}>
-          <Modal isOpen={isModalOpen} onClose={closeModal} />
+          <Modal isOpen={isModalOpen} onClose={closeModal} isCrossdomain={isCrossDomain} />
           <Menu
             menuButton={<Button 
             id="menu-button"
@@ -28,9 +29,17 @@ export default function WalkMeTools(props) {
             WalkMe Tools
             </Button>}
           >
-            <MenuItem onClick={() => {
+            <SubMenu label="Launch iFrame">
+              <MenuItem onClick={() => {
               setIsModalOpen(true)}
-              }>Launch iFrame</MenuItem>
+              }>Cross Domain
+              </MenuItem>
+              <MenuItem onClick={() => {
+                setIsCrossDomain(false)
+                setIsModalOpen(true)
+              }
+              }>Same Domain</MenuItem>
+            </SubMenu>
             <MenuItem onClick={() => {WalkMeAPI.launchTracker()}}>Launch Flow Tracker</MenuItem>
             <MenuItem onClick={() => {_walkmeInternals.launchEnvEx()}}>Launch EnvEx</MenuItem>
             <SubMenu label="Logs">

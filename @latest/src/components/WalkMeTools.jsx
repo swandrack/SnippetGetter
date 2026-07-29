@@ -20,7 +20,7 @@ export default function WalkMeTools(props) {
   if(props.walkmeLoaded === true) {
     return(
         <ThemeProvider theme={theme}>
-          <Modal isOpen={isModalOpen} onClose={closeModal} isCrossdomain={isCrossDomain} />
+          <Modal isOpen={isModalOpen} onClose={closeModal} isCrossDomain={isCrossDomain} />
           <Menu
             menuButton={<Button 
             id="menu-button"

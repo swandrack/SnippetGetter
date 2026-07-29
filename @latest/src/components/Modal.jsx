@@ -1,13 +1,14 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { Button } from "@mui/material";
 
-export default function Modal({isOpen, onClose}, isCrossDomain) {
+export default function Modal({isOpen, onClose, isCrossDomain}) {
 
   if (!isOpen) {
     return null
   }
   else {
       if (!isCrossDomain) {
+        console.log(isCrossDomain);
         return(
         <Dialog open={isOpen} onClose={onClose}>
           <div className="modal-overlay" onClick={onClose}>
@@ -21,8 +22,6 @@ export default function Modal({isOpen, onClose}, isCrossDomain) {
                 <Button 
                 onClick={onClose} 
                 id="modal-close-button"
-                variant="outlined"
-                color="alert"
                 >Close</Button>
               </div>
             </DialogPanel>

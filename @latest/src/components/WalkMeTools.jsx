@@ -6,6 +6,7 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/zoom.css';
 import {ThemeProvider} from "@mui/material";
 import Modal from "./Modal";
+import { setLocalKeys, setCookie,  } from "../utils/storage";
 
 export default function WalkMeTools(props) {
   const theme = useTheme();
@@ -32,7 +33,7 @@ export default function WalkMeTools(props) {
               setIsModalOpen(true)}
               }>Launch iFrame</MenuItem>
             <MenuItem onClick={() => {WalkMeAPI.launchTracker()}}>Launch Flow Tracker</MenuItem>
-            <MenuItem onClick={() => {_walkmeInternals.launchEnvEx()}}>Launch EnvEx</MenuItem>
+            <MenuItem onClick={() => {_walkmeInternals.launchEnvEx('/js/main.js')}}>Launch EnvEx</MenuItem>
             <SubMenu label="Logs">
               <SubMenu label="Player Logs">
               <MenuItem onClick={() => {
@@ -50,6 +51,46 @@ export default function WalkMeTools(props) {
                 _walkmeInternals.ctx.get("PrelibLogger").enableLog()}}>Enable Logs</MenuItem>
               <MenuItem onClick={() => {
                 _walkmeInternals.ctx.get("PrelibLogger").disableLog()}}>Disable Logs</MenuItem>
+                </SubMenu>
+            </SubMenu>
+            <SubMenu label="Manage Storage">
+              <SubMenu label="Set Storage">
+                <MenuItem onClick={() => {
+                    const keyName = prompt("Please enter key name")
+                    const keyValue = prompt("Please enter key value")
+                    setLocalKeys(keyName, keyValue)
+                  }}>
+                  Set storage Key
+                </MenuItem>
+                <MenuItem onClick={() => {
+                  const keyName = prompt("Please enter cookie name")
+                  const keyValue = prompt("Please enter cookie value")
+                  setCookie(keyName, keyValue)
+                }}>
+                  Set Cookie
+                </MenuItem>
+              </SubMenu>
+              <SubMenu label="Manage Storage">
+                <MenuItem onClick={() => {
+                  const keyName = prompt("Please enter key name")
+                  localStorage.removeItem(keyName)
+                }}>Remove Storage Key</MenuItem>
+                <MenuItem onClick={() => {
+                  const question = prompt("Do you want to delete all storage?");
+                  if(question.toLowerCase() === "yes") {
+                    localStorage.clear()
+                    document.cookie.split(";").forEach((c) => {
+                      document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                    })
+                    alert("Storage cleared")
+                  } else {
+                    alert("Storage not cleared")
+                  }
+                }}>Clear Storage</MenuItem>
+                <MenuItem onClick={() => {
+                  const keyName = prompt("Please enter cookie name")
+                  document.cookie = keyName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                }}>Delete Cookie</MenuItem>
                 </SubMenu>
             </SubMenu>
           </Menu>

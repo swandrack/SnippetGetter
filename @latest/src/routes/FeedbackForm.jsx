@@ -13,8 +13,6 @@ export default function FeedbackForm() {
     submitFeedback(name, email, subject, body);
   }
 
-  const navigation = useNavigate();
-
   function clearForm() {
     setBody("")
     setEmail("")

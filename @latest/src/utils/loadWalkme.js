@@ -2,21 +2,22 @@ export function loadWalkMe(dc, guid, env) {
     var walkme = document.createElement("script");
     walkme.type = "text/javascript";
     walkme.async = true;
+    let envir = env.toLowerCase();
     switch (dc) {
         case "US": 
         case null:
         case "null":
         case "":
-            walkme.src = `https://cdn.walkme.com/users/${guid}${env}/walkme_${guid}_https.js`;
+            walkme.src = `https://cdn.walkme.com/users/${guid}${envir}/walkme_${guid}_https.js`;
             break;
         case "EU":
-            walkme.src = `https://eu-cdn.walkme.com/users/${guid}${env}/walkme_${guid}_https.js`;
+            walkme.src = `https://eu-cdn.walkme.com/users/${guid}${envir}/walkme_${guid}_https.js`;
             break;
         case "SAP US":
-            walkme.src = `https://cdn-us01.walkme.cloud.sap/users/${guid}${env}/walkme_${guid}_https.js`;
+            walkme.src = `https://cdn-us01.walkme.cloud.sap/users/${guid}${envir}/walkme_${guid}_https.js`;
             break;
         case "SAP EU":
-            walkme.src = `https://cdn-eu01.walkme.cloud.sap/users/${guid}${env}/walkme_${guid}_https.js`;
+            walkme.src = `https://cdn-eu01.walkme.cloud.sap/users/${guid}${envir}/walkme_${guid}_https.js`;
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(walkme, s);

@@ -14,6 +14,7 @@ import WalkMeTools from "./WalkMeTools";
 import { loadAPI } from "../utils/apimanager";
 import { combineEnvs } from "../utils/loadWalkme";
 import DatacenterDropdown from "./DatacenterDropdown";
+import WebTools from "./WebTools";
 
 export function WalkMeForm() {
     const [guid, setGuid] = useState(getLocalStorageItem("guid"));
@@ -189,6 +190,7 @@ export function WalkMeForm() {
                         Remove WalkMe
                     </Button>
                     <WalkMeTools walkmeLoaded={walkmeLoaded} />
+                    <WebTools />
                 </Box>
             </Box>
         </Container>
